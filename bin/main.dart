@@ -210,6 +210,9 @@ String generateModelForCollection(CollectionModel collection) {
 
   // Add class declaration
   buffer.writeln("class ${removeSnake(capName(collection.name))}Model {");
+  buffer.writeln("  static const String collectionId = '${collection.id}';");
+  buffer
+      .writeln("  static const String collectionName = '${collection.name}';");
   generateClassFields(buffer, collection.schema);
   generateConstructor(collection.name, buffer, collection.schema);
   generateFactoryConstructor(buffer, collection);
