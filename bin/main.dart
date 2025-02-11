@@ -214,6 +214,7 @@ String generateModelForCollection(CollectionModel collection) {
   buffer
       .writeln("  static const String collectionName = '${collection.name}';");
   generateClassFields(buffer, collection.schema);
+  generateRecordModelFields(buffer, collection.schema);
   generateConstructor(collection.name, buffer, collection.schema);
   generateFactoryConstructor(buffer, collection);
   generateToMapMethod(buffer, collection.schema);
@@ -268,6 +269,18 @@ void generateClassFields(StringBuffer buffer, List<SchemaField> schema) {
     buffer.writeln(
         "  static const String ${removeSnake(capName(field.name))} = '${field.name}';");
   }
+}
+
+/// Generates the RecordModel for the instance.
+void generateRecordModelFields(StringBuffer buffer, List<SchemaField> schema) {
+  buffer.writeln(" \n // RecordModel");
+  buffer.writeln("  RecordModel get recordModel {");
+  buffer.writeln("    return RecordModel.fromJson({");
+  buffer.writeln("      ...toMap(),");
+  buffer.writeln("      collectionId: collectionId,");
+  buffer.writeln("      collectionName: collectionName,");
+  buffer.writeln("    });");
+  buffer.writeln("  }");
 }
 
 /// Generates the constructor for the class.
