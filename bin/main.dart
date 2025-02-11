@@ -279,11 +279,11 @@ void generateRecordModelFields(StringBuffer buffer, List<SchemaField> schema) {
 
   buffer.writeln("    return RecordModel.fromJson({");
   buffer.writeln("      ...toMap(),");
-  buffer.writeln("      collectionId: collectionId,");
-  buffer.writeln("      collectionName: collectionName,");
-  buffer.writeln("      id: id,");
-  buffer.writeln("      created: created,");
-  buffer.writeln("      updated: updated,");
+  buffer.writeln("      'collectionId': collectionId,");
+  buffer.writeln("      'collectionName': collectionName,");
+  buffer.writeln("      'id': id,");
+  buffer.writeln("      'created': created?.toIso8601String(),");
+  buffer.writeln("      'updated': updated?.toIso8601String(),");
   buffer.writeln("    });");
   buffer.writeln("  }");
 }
