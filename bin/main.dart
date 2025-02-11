@@ -274,11 +274,16 @@ void generateClassFields(StringBuffer buffer, List<SchemaField> schema) {
 /// Generates the RecordModel for the instance.
 void generateRecordModelFields(StringBuffer buffer, List<SchemaField> schema) {
   buffer.writeln(" \n // RecordModel");
-  buffer.writeln("  RecordModel get recordModel {");
+  buffer.writeln("  RecordModel? get recordModel {");
+  buffer.writeln("    if (id == null) return null;\n");
+
   buffer.writeln("    return RecordModel.fromJson({");
   buffer.writeln("      ...toMap(),");
   buffer.writeln("      collectionId: collectionId,");
   buffer.writeln("      collectionName: collectionName,");
+  buffer.writeln("      id: id,");
+  buffer.writeln("      created: created,");
+  buffer.writeln("      updated: updated,");
   buffer.writeln("    });");
   buffer.writeln("  }");
 }
